@@ -5,11 +5,18 @@ class WorkoutPlansController < ApplicationController
     end
 
     def create
-        user = User.first
+        user = User.find(params[:userId])
         name = plan_params[:name]
         user.workout_plans.create(name: name)
         render json: user.workout_plans, include: [:exercises]
     end
+
+    def destroy
+        exercise = WorkoutExercise.find_by(exercise_id: params[:exerciseId])
+        byebug
+        
+    end
+
 
     private
     def plan_params 
